@@ -247,38 +247,8 @@
           </label>
         </div>
         <article role="main">
-          <section id="neuralprophet">
-<h1>NeuralProphet<a class="headerlink" href="#neuralprophet" title="Permalink to this headline">¶</a></h1>
-<p>Based on Neural Networks, inspired by <a class="reference external" href="https://github.com/facebook/prophet">Facebook Prophet</a> and <a class="reference external" href="https://github.com/ourownstory/AR-Net">AR-Net</a>, built on Pytorch.</p>
-<section id="links">
-<h2>Links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p><a class="reference external" href="https://arxiv.org/abs/2111.15397?fbclid=IwAR2vCkHYiy5yuPPjWXpJgAJs-uD5NkH4liORt1ch4a6X_kmpMqagGtXyez4">Read the paper</a></p></li>
-<li><p><a class="reference external" href="https://github.com/ourownstory/neural_prophet">GitHub repository</a></p></li>
-</ul>
-</section>
-<section id="why-neuralprophet">
-<h2>Why NeuralProphet?<a class="headerlink" href="#why-neuralprophet" title="Permalink to this headline">¶</a></h2>
-<p>NeuralProphet changes the way time series modelling and forecasting is done:</p>
-<ul class="simple">
-<li><p>Support for auto-regression and covariates.</p></li>
-<li><p>Automatic selection of training related hyperparameters.</p></li>
-<li><p>Fourier term seasonality at different periods such as yearly, daily, weekly, hourly.</p></li>
-<li><p>Piecewise linear trend with optional automatic changepoint detection.</p></li>
-<li><p>Plotting for forecast components, model coefficients and final predictions.</p></li>
-<li><p>Support for global modeling.</p></li>
-<li><p>Lagged and future regressors.</p></li>
-<li><p>Sparsity of coefficients through regularization.</p></li>
-<li><p>User-friendly and powerful Python package:</p></li>
-</ul>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">neuralprophet</span> <span class="kn">import</span> <span class="n">NeuralProphet</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span> <span class="o">=</span> <span class="n">NeuralProphet</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">your_df</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'D'</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">forecast</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">your_df</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">m</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">forecast</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
+          <section id="neuralprophet-quick-start">
+<h1>NeuralProphet - Quick Start<a class="headerlink" href="#neuralprophet-quick-start" title="Permalink to this headline">¶</a></h1>
 <section id="installing">
 <h2>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">¶</a></h2>
 <p>NeuralProphet can be installed with <a class="reference external" href="https://pypi.org/project/neuralprophet/">pip</a>:</p>
@@ -370,9 +340,7 @@ $ pip install .
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">NeuralProphet</a><ul>
-<li><a class="reference internal" href="#links">Links</a></li>
-<li><a class="reference internal" href="#why-neuralprophet">Why NeuralProphet?</a></li>
+<li><a class="reference internal" href="#">NeuralProphet - Quick Start</a><ul>
 <li><a class="reference internal" href="#installing">Installing</a></li>
 <li><a class="reference internal" href="#get-started-with-tutorials">Get started with Tutorials</a><ul>
 </ul>

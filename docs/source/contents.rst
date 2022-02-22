@@ -4,41 +4,8 @@
    contain the root `toctree` directive.
 
 =========================================
-NeuralProphet
+NeuralProphet - Quick Start
 =========================================
-
-Based on Neural Networks, inspired by `Facebook Prophet <https://github.com/facebook/prophet>`_ and `AR-Net <https://github.com/ourownstory/AR-Net>`_, built on Pytorch.
-
-
-Links
-------
-
-- `Read the paper <https://arxiv.org/abs/2111.15397?fbclid=IwAR2vCkHYiy5yuPPjWXpJgAJs-uD5NkH4liORt1ch4a6X_kmpMqagGtXyez4>`_
-- `GitHub repository <https://github.com/ourownstory/neural_prophet>`_
-
-Why NeuralProphet? 
--------------------
-
-NeuralProphet changes the way time series modelling and forecasting is done:
-
-- Support for auto-regression and covariates.
-- Automatic selection of training related hyperparameters.
-- Fourier term seasonality at different periods such as yearly, daily, weekly, hourly.
-- Piecewise linear trend with optional automatic changepoint detection.
-- Plotting for forecast components, model coefficients and final predictions.
-- Support for global modeling.
-- Lagged and future regressors.
-- Sparsity of coefficients through regularization.
-- User-friendly and powerful Python package:
-
-.. code-block:: pycon
-
-   >>> from neuralprophet import NeuralProphet 
-   >>> m = NeuralProphet()
-   >>> metrics = m.fit(your_df, freq='D')
-   >>> forecast = m.predict(your_df)
-   >>> m.plot(forecast)
-
 
 Installing
 ----------
