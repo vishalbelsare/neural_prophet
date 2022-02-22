@@ -318,8 +318,7 @@ and the indices in the input dataframe corresponding to each event.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>country</strong> (<em>string</em>) – country name to retrieve country specific holidays</p></li>
-<li><p><strong>df</strong> (<em>Dataframe</em><em> or </em><em>list of dataframes</em>) – Dataframe or list of dataframes from which datestamps will be</p></li>
-<li><p><strong>from</strong> (<em>retrieved</em>) – </p></li>
+<li><p><strong>df</strong> (<em>Dataframe</em>) – Dataframe from which datestamps will be retrieved from</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -425,7 +424,7 @@ for country specific holidays</p></li>
 </dd></dl>
 <dl class="py function">
 <dt class="sig sig-object py" id="neuralprophet.utils.set_auto_seasonalities">
-<span class="sig-prename descclassname"><span class="pre">neuralprophet.utils.</span></span><span class="sig-name descname"><span class="pre">set_auto_seasonalities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">season_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_modeling</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.utils.set_auto_seasonalities" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">neuralprophet.utils.</span></span><span class="sig-name descname"><span class="pre">set_auto_seasonalities</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">season_config</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.utils.set_auto_seasonalities" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set seasonalities that were left on auto or set by user.</p>
 <p>Turns on yearly seasonality if there is &gt;=2 years of history.
 Turns on weekly seasonality if there is &gt;=2 weeks of history, and the
@@ -435,11 +434,8 @@ spacing between dates in the history is &lt;1 day.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>Dataframe</em><em> or </em><em>list of dataframes</em>) – Dataframe or list of dataframes from which datestamps will be</p></li>
-<li><p><strong>from</strong> (<em>retrieved</em>) – </p></li>
+<li><p><strong>df</strong> (<em>Dataframe</em>) – Dataframe from which datestamps will be retrieved from</p></li>
 <li><p><strong>season_config</strong> (<a class="reference internal" href="configure.html#neuralprophet.configure.AllSeason" title="neuralprophet.configure.AllSeason"><em>configure.AllSeason</em></a>) – NeuralProphet seasonal model configuration, as after __init__</p></li>
-<li><p><strong>local_modeling</strong> (<em>bool</em>) – when set to true each episode from list of dataframes will be considered</p></li>
-<li><p><strong>locally</strong> (<em>i.e. seasonality</em><em>, </em><em>data_params</em><em>, </em><em>normalization</em>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
