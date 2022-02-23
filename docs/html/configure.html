@@ -146,7 +146,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -179,16 +179,16 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
-<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="model-overview.html">Model Overview</a></li>
-<li class="toctree-l1"><a class="reference internal" href="changes-from-prophet.html">Changes from prophet</a></li>
-<li class="toctree-l1"><a class="reference internal" href="trend.html">Trend</a></li>
-<li class="toctree-l1"><a class="reference internal" href="seasonality.html">Seasonality</a></li>
-<li class="toctree-l1"><a class="reference internal" href="auto-regression.html">Auto-regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lagged-regressors.html">Lagged-regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="events.html">Events</a></li>
-<li class="toctree-l1"><a class="reference internal" href="future-regressors.html">Future-regression</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hyperparameter-selection.html">Hyperparameter-selection</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="model-overview.html">Model Overview</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="trend.html">Trend</a></li>
+<li class="toctree-l2"><a class="reference internal" href="seasonality.html">Seasonality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto-regression.html">Auto-regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lagged-regressors.html">Lagged-regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="events.html">Events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="future-regressors.html">Future-regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hyperparameter-selection.html">Hyperparameter-selection</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribution</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Feature Tutorials</span></p>
@@ -241,14 +241,17 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <section id="module-neuralprophet.configure">
-<span id="core-module-documentation"></span><h1>Core Module Documentation<a class="headerlink" href="#module-neuralprophet.configure" title="Permalink to this headline">¶</a></h1>
+          <section id="core-module-documentation">
+<h1>Core Module Documentation<a class="headerlink" href="#core-module-documentation" title="Permalink to this headline">¶</a></h1>
+<p>this is a test</p>
+<section id="module-neuralprophet.configure">
+<span id="core-module-subheader"></span><h2>Core Module Subheader<a class="headerlink" href="#module-neuralprophet.configure" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="neuralprophet.configure.AR">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neuralprophet.configure.</span></span><span class="sig-name descname"><span class="pre">AR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_lags</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ar_sparsity</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.configure.AR" title="Permalink to this definition">¶</a></dt>
@@ -306,6 +309,7 @@
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">neuralprophet.configure.</span></span><span class="sig-name descname"><span class="pre">Trend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">growth:</span> <span class="pre">str</span></em>, <em class="sig-param"><span class="pre">changepoints:</span> <span class="pre">list</span></em>, <em class="sig-param"><span class="pre">n_changepoints:</span> <span class="pre">int</span></em>, <em class="sig-param"><span class="pre">changepoints_range:</span> <span class="pre">float</span></em>, <em class="sig-param"><span class="pre">trend_reg:</span> <span class="pre">float</span></em>, <em class="sig-param"><span class="pre">trend_reg_threshold:</span> <span class="pre">(&lt;class</span> <span class="pre">'bool'&gt;</span></em>, <em class="sig-param"><span class="pre">&lt;class</span> <span class="pre">'float'&gt;)</span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.configure.Trend" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 </section>
+</section>
 
         </article>
       </div>
@@ -348,8 +352,27 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            Contents
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Core Module Documentation</a><ul>
+<li><a class="reference internal" href="#module-neuralprophet.configure">Core Module Subheader</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

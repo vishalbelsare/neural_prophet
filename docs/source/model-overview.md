@@ -1,11 +1,25 @@
 # Overview of the NeuralProphet Model
 
+```{toctree}
+:hidden:
+
+Trend<trend>
+Seasonality<seasonality>
+Auto-regression<auto-regression>
+Lagged-regression<lagged-regressors>
+Events<events>
+Future-regression<future-regressors>
+Hyperparameter-selection<hyperparameter-selection>
+```
+
 NeuralProphet is a Neural Network based PyTorch implementation of a user-friendly time series forecasting tool for practitioners.
 This is heavily inspired by [Prophet](https://facebook.github.io/prophet/), which is the popular forecasting tool developed by Facebook. 
 NeuralProphet is developed in a fully modular architecture which makes it scalable to add any additional components
 in the future. Our vision is to develop a simple to use forecasting tool for users while retaining the original objectives of
 Prophet such as interpretability, configurability and providing much more such as the automatic differencing capabilities by using PyTorch as
 the backend.       
+
+
 
 ## Time Series Components
 NeuralProphet is a decomposable time series model with the components, trend, seasonality, auto-regression, special events,
