@@ -179,6 +179,7 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
+<li class="toctree-l1"><a class="reference internal" href="full_simple_model.html">Full Simple Model</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="model-overview.html">Model Overview</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="trend.html">Trend</a></li>
 <li class="toctree-l2"><a class="reference internal" href="seasonality.html">Seasonality</a></li>
@@ -189,6 +190,7 @@
 <li class="toctree-l2"><a class="reference internal" href="hyperparameter-selection.html">Hyperparameter-selection</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="changes-from-prophet.html">Changes from Prophet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribution</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Feature Tutorials</span></p>
@@ -203,11 +205,17 @@
 <li class="toctree-l1"><a class="reference internal" href="sparse_autoregression_yosemite_temps.html">Sparse Autoregression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sub_daily_data_yosemite_temps.html">Sub-daily data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trend_peyton_manning.html">Fitting a changing trend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="global_modeling.html">Global Model</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Application Tutorials</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html">Building load forecasting: Hospital in SF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Renewable Energy: Forecasting hourly solar irradiance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#1-step-ahead-forecast-with-Auto-Regression-including-Integration">1-step ahead forecast with Auto-Regression including Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Code Documentations</span></p>
 <ul>
@@ -698,8 +706,9 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 </section>
+</section>
 <section id="1-step-ahead-forecast-with-Auto-Regresseion">
-<h2>1-step ahead forecast with Auto-Regresseion<a class="headerlink" href="#1-step-ahead-forecast-with-Auto-Regresseion" title="Permalink to this headline">¶</a></h2>
+<h1>1-step ahead forecast with Auto-Regresseion<a class="headerlink" href="#1-step-ahead-forecast-with-Auto-Regresseion" title="Permalink to this headline">¶</a></h1>
 <p>In this second section, we will train a 1-step ahead forecaster on solar irradiance data (that can be a proxy for solar PV production). We can train this forecaster considering the privious 24 steps and disabling trend and seasonality.</p>
 <p>The paramters that we can modify are the number of lags and the AR sparsity.</p>
 <div class="nbinput docutils container">
@@ -878,7 +887,6 @@ div.rendered_html tbody tr:hover {
 <img alt="_images/energy_solar_pv_18_0.png" src="_images/energy_solar_pv_18_0.png"/>
 </div>
 </div>
-</section>
 <section id="Sparsifying-the-AR-coefficients">
 <h2>Sparsifying the AR coefficients<a class="headerlink" href="#Sparsifying-the-AR-coefficients" title="Permalink to this headline">¶</a></h2>
 <p>By setting an <code class="docutils literal notranslate"><span class="pre">ar_sparsity</span> <span class="pre">&lt;</span> <span class="pre">1</span></code> we can reduce the number of non-zero AR coefficients.</p>
@@ -992,8 +1000,9 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 </section>
+</section>
 <section id="1-step-ahead-forecast-with-Auto-Regression-including-Integration">
-<h2>1-step ahead forecast with Auto-Regression including Integration<a class="headerlink" href="#1-step-ahead-forecast-with-Auto-Regression-including-Integration" title="Permalink to this headline">¶</a></h2>
+<h1>1-step ahead forecast with Auto-Regression including Integration<a class="headerlink" href="#1-step-ahead-forecast-with-Auto-Regression-including-Integration" title="Permalink to this headline">¶</a></h1>
 <p>Next, we will add the differences of the series as a lagged covariate. This basically extends the model from AR to ARI, where the I stands for ‘integrated’ time series.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
@@ -1167,7 +1176,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </section>
 <section id="1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">
-<h2>1 step ahead forecast with AR-Net: Using a Neural Network<a class="headerlink" href="#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network" title="Permalink to this headline">¶</a></h2>
+<h1>1 step ahead forecast with AR-Net: Using a Neural Network<a class="headerlink" href="#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network" title="Permalink to this headline">¶</a></h1>
 <p>There is something to consider here, if we consider a neural network with at least one hidden layer. For a high enough learning rate (probably &gt; 0.1), the gradient seems to vanish and forces the AR net output to 0.</p>
 <p>From below, we can see that the forecast output has a strange behavior. it looks like the output is exactly the sum of the weekly, daily seasonlality with trend. With no noise and changes at all.</p>
 <div class="nbinput docutils container">
@@ -1223,7 +1232,6 @@ div.rendered_html tbody tr:hover {
 <img alt="_images/energy_solar_pv_30_0.png" src="_images/energy_solar_pv_30_0.png"/>
 </div>
 </div>
-</section>
 <section id="Learning-Rate-matters-when-training-a-Neural-Network.">
 <h2>Learning Rate matters when training a Neural Network.<a class="headerlink" href="#Learning-Rate-matters-when-training-a-Neural-Network." title="Permalink to this headline">¶</a></h2>
 <p>An easy fix is to set the learning rate at a low enough value, likely around 0.01 to 0.001.</p>
@@ -1455,10 +1463,14 @@ div.rendered_html tbody tr:hover {
             <ul>
 <li><a class="reference internal" href="#">Renewable Energy: Forecasting hourly solar irradiance</a><ul>
 <li><a class="reference internal" href="#Generic-forecast:-Time-based-features-only">Generic forecast: Time-based features only</a></li>
-<li><a class="reference internal" href="#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a><ul>
 <li><a class="reference internal" href="#Sparsifying-the-AR-coefficients">Sparsifying the AR coefficients</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#1-step-ahead-forecast-with-Auto-Regression-including-Integration">1-step ahead forecast with Auto-Regression including Integration</a></li>
-<li><a class="reference internal" href="#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
+<li><a class="reference internal" href="#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a><ul>
 <li><a class="reference internal" href="#Learning-Rate-matters-when-training-a-Neural-Network.">Learning Rate matters when training a Neural Network.</a></li>
 </ul>
 </li>

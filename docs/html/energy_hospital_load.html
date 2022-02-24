@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Renewable Energy: Forecasting hourly solar irradiance" href="energy_solar_pv.html" /><link rel="prev" title="Fitting a changing trend" href="trend_peyton_manning.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Renewable Energy: Forecasting hourly solar irradiance" href="energy_solar_pv.html" /><link rel="prev" title="Global Model" href="global_modeling.html" />
 
     <link rel="shortcut icon" href="_static/np_favicon.png"/><meta name="generator" content="sphinx-4.2.0, furo 2021.10.09"/>
         <title>Building load forecasting: Hospital in SF - NeuralProphet documentation</title>
@@ -179,6 +179,7 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
+<li class="toctree-l1"><a class="reference internal" href="full_simple_model.html">Full Simple Model</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="model-overview.html">Model Overview</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="trend.html">Trend</a></li>
 <li class="toctree-l2"><a class="reference internal" href="seasonality.html">Seasonality</a></li>
@@ -189,6 +190,7 @@
 <li class="toctree-l2"><a class="reference internal" href="hyperparameter-selection.html">Hyperparameter-selection</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="changes-from-prophet.html">Changes from Prophet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribution</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Feature Tutorials</span></p>
@@ -203,11 +205,17 @@
 <li class="toctree-l1"><a class="reference internal" href="sparse_autoregression_yosemite_temps.html">Sparse Autoregression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sub_daily_data_yosemite_temps.html">Sub-daily data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trend_peyton_manning.html">Fitting a changing trend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="global_modeling.html">Global Model</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Application Tutorials</span></p>
 <ul class="current">
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Building load forecasting: Hospital in SF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html">Renewable Energy: Forecasting hourly solar irradiance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regression-including-Integration">1-step ahead forecast with Auto-Regression including Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Code Documentations</span></p>
 <ul>
@@ -724,8 +732,10 @@ Epoch[108/108]: 100%|█| 108/108 [00:35&lt;00:00,  3.00it/s, SmoothL1Loss=0.005
 <img alt="_images/energy_hospital_load_9_0.png" src="_images/energy_hospital_load_9_0.png"/>
 </div>
 </div>
+</section>
+</section>
 <section id="1-step-ahead-forecast-with-Auto-Regression">
-<h3>1-step ahead forecast with Auto-Regression<a class="headerlink" href="#1-step-ahead-forecast-with-Auto-Regression" title="Permalink to this headline">¶</a></h3>
+<h1>1-step ahead forecast with Auto-Regression<a class="headerlink" href="#1-step-ahead-forecast-with-Auto-Regression" title="Permalink to this headline">¶</a></h1>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -870,7 +880,7 @@ Epoch[108/108]: 100%|█| 108/108 [00:23&lt;00:00,  4.50it/s, SmoothL1Loss=0.001
 </div>
 </section>
 <section id="1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">
-<h3>1 step ahead forecast with AR-Net: Using a Neural Network<a class="headerlink" href="#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network" title="Permalink to this headline">¶</a></h3>
+<h1>1 step ahead forecast with AR-Net: Using a Neural Network<a class="headerlink" href="#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network" title="Permalink to this headline">¶</a></h1>
 <p>Here, we will use the power of a neural Network to fit non-linear patterns.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
@@ -1027,8 +1037,6 @@ Epoch[108/108]: 100%|█| 108/108 [00:36&lt;00:00,  2.99it/s, SmoothL1Loss=0.000
 <script type="application/vnd.jupyter.widget-state+json">
 {"24bf564f55644476911a6cf004a395e7": {"model_module": "@jupyter-widgets/controls", "model_name": "HTMLModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HTMLView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_aab682cd3df24821a80331720f7c24e5", "placeholder": "\u200b", "style": "IPY_MODEL_f35fc9cbd82c4187a4cdc08c3ac26998", "value": " 264/297 [00:04&lt;00:00, 59.93it/s]"}}, "2d8235496ec642af8192f52d9f2692b1": {"model_module": "@jupyter-widgets/controls", "model_name": "HTMLModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HTMLView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_8a192ccc35e94e9f8be85898ed583e2c", "placeholder": "\u200b", "style": "IPY_MODEL_87c170d1e00742a29e7f797e98c49cc2", "value": " 89%"}}, "4ac0917121f8498698e087259b787dcf": {"model_module": "@jupyter-widgets/controls", "model_name": "HBoxModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HBoxView", "box_style": "", "children": ["IPY_MODEL_2d8235496ec642af8192f52d9f2692b1", "IPY_MODEL_c94a8ae41b994c55a96ad44806b0f1c7", "IPY_MODEL_24bf564f55644476911a6cf004a395e7"], "layout": "IPY_MODEL_94108fe9090f47c7ba2216479e0d3fac"}}, "87c170d1e00742a29e7f797e98c49cc2": {"model_module": "@jupyter-widgets/controls", "model_name": "DescriptionStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "8a192ccc35e94e9f8be85898ed583e2c": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "94108fe9090f47c7ba2216479e0d3fac": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "9467345334da47a8beadc770feef952a": {"model_module": "@jupyter-widgets/controls", "model_name": "ProgressStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "bar_color": null, "description_width": ""}}, "aab682cd3df24821a80331720f7c24e5": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "c94a8ae41b994c55a96ad44806b0f1c7": {"model_module": "@jupyter-widgets/controls", "model_name": "FloatProgressModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ProgressView", "bar_style": "danger", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_dc468cd35d2b4f0e8eb287689ac15412", "max": 297, "min": 0, "orientation": "horizontal", "style": "IPY_MODEL_9467345334da47a8beadc770feef952a", "value": 264}}, "dc468cd35d2b4f0e8eb287689ac15412": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "f35fc9cbd82c4187a4cdc08c3ac26998": {"model_module": "@jupyter-widgets/controls", "model_name": "DescriptionStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}}
 </script></section>
-</section>
-</section>
 
         </article>
       </div>
@@ -1044,14 +1052,14 @@ Epoch[108/108]: 100%|█| 108/108 [00:36&lt;00:00,  2.99it/s, SmoothL1Loss=0.000
               </div>
               <svg><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="trend_peyton_manning.html">
+          <a class="prev-page" href="global_modeling.html">
               <svg><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Fitting a changing trend</div>
+                <div class="title">Global Model</div>
                 
               </div>
             </a>
@@ -1084,13 +1092,11 @@ Epoch[108/108]: 100%|█| 108/108 [00:36&lt;00:00,  2.99it/s, SmoothL1Loss=0.000
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Building load forecasting: Hospital in SF</a><ul>
-<li><a class="reference internal" href="#Generic-forecast:-Time-based-features-only">Generic forecast: Time-based features only</a><ul>
+<li><a class="reference internal" href="#Generic-forecast:-Time-based-features-only">Generic forecast: Time-based features only</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
 <li><a class="reference internal" href="#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
-</ul>
-</li>
-</ul>
-</li>
 </ul>
 
           </div>

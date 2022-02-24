@@ -31,17 +31,60 @@ Alternatively, you can get the most up to date version by cloning directly from 
   $ pip install .
 
 
+Simple Model 
+----------------
+
+The input data should have two columns, :code:`ds` which has the timestamps and :code:`y` column which
+contains the observed values of the time series. 
+
+.. code-block:: Python
+
+  from neuralprophet import NeuralProphet
+  import pandas as pd
+
+  data_location = "https://raw.githubusercontent.com/ourownstory/neuralprophet-data/main/datasets/"
+
+  df = pd.read_csv(data_location + 'wp_log_peyton_manning.csv') 
+
+To setup a simple NeuralProphet model, create an object of the :code:`NeuralProphet` class as follows and call the fit function. Frequency is automatically detected 😉
+
+.. code-block:: Python
+
+  m = NeuralProphet()
+  metrics = m.fit(df)
+
+Now we can simple make predictions using this fitted model by creating a future dataframe and setting the forecast horizon via the functional argument :code:`periods`: 
+
+.. code-block:: Python 
+
+  future = m.make_future_dataframe(df=df, periods=365)
+  forecast = m.predict(df=future)
+
+Next, we obtain the forecast and visualize our data... et voila 👩🏼‍🎨
+
+.. code-block:: Python 
+
+  fig_forecast = m.plot(forecast)
+
+.. image:: images/plot_forecast_simple_model_1.png 
+  :align: center
+
+Checkout the :ref:`my-reference-label2` description for additional basic features of NeuralProphet. 
+
+
 .. toctree::
    :hidden:
    :maxdepth: 1
 
-
+   Full Simple Model<full_simple_model>
    Model Overview<model-overview>
+   Changes from Prophet<changes-from-prophet.md>
    Contribution<contribute>
-
 
 Get started with Tutorials
 ---------------------------
+
+.. _target:
 
 .. toctree::
    :maxdepth: 1
@@ -57,6 +100,7 @@ Get started with Tutorials
    sparse_autoregression_yosemite_temps.nblink
    sub_daily_data_yosemite_temps.nblink
    trend_peyton_manning.nblink
+   global_modeling.nblink
    
 
 .. toctree::

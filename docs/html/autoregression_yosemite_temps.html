@@ -179,6 +179,7 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
+<li class="toctree-l1"><a class="reference internal" href="full_simple_model.html">Full Simple Model</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="model-overview.html">Model Overview</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="trend.html">Trend</a></li>
 <li class="toctree-l2"><a class="reference internal" href="seasonality.html">Seasonality</a></li>
@@ -189,6 +190,7 @@
 <li class="toctree-l2"><a class="reference internal" href="hyperparameter-selection.html">Hyperparameter-selection</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="changes-from-prophet.html">Changes from Prophet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribution</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Feature Tutorials</span></p>
@@ -203,11 +205,17 @@
 <li class="toctree-l1"><a class="reference internal" href="sparse_autoregression_yosemite_temps.html">Sparse Autoregression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sub_daily_data_yosemite_temps.html">Sub-daily data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trend_peyton_manning.html">Fitting a changing trend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="global_modeling.html">Global Model</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Application Tutorials</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html">Building load forecasting: Hospital in SF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html">Renewable Energy: Forecasting hourly solar irradiance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regression-including-Integration">1-step ahead forecast with Auto-Regression including Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Code Documentations</span></p>
 <ul>
@@ -659,7 +667,7 @@ INFO - (NP.forecaster._handle_missing_data) - 12 NaN values in column y were aut
 <h2>Multi-step forecast<a class="headerlink" href="#Multi-step-forecast" title="Permalink to this headline">¶</a></h2>
 <p>To predict multiple steps into the future, we could ‘unroll’ our single-step model, by predicting a step ahead, adding the forecasted value to our data, and then forecasting the next step until we reach the horizon we are interested in. However, there is a better way to do this: We can directly forecast multiple steps ahead with NeuralProphet.</p>
 <p>We can set <code class="docutils literal notranslate"><span class="pre">n_forecasts</span></code> to the desired number of steps we would like to forecast (also known as ‘forecast horizon’). NeuralProphet will forecast <code class="docutils literal notranslate"><span class="pre">n_forecasts</span></code> steps into the future, at every single step. Thus, we have <code class="docutils literal notranslate"><span class="pre">n_forecasts</span></code> overlapping predictions of vaying age at every historic point.</p>
-<p>When icreasing the forecast horizon <code class="docutils literal notranslate"><span class="pre">n_forecasts</span></code>, we should also increase the number of past observations <code class="docutils literal notranslate"><span class="pre">n_lags</span></code> to at least the same value.</p>
+<p>When increasing the forecast horizon <code class="docutils literal notranslate"><span class="pre">n_forecasts</span></code>, we should also increase the number of past observations <code class="docutils literal notranslate"><span class="pre">n_lags</span></code> to at least the same value.</p>
 <p>Here, we forecast the next 3 hours based on the last observed 6 hours, in 5-minute steps:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -817,7 +825,8 @@ WARNING - (NP.plotting.plot) - Legend is available only for the ten first handle
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">forecast</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span></span><span class="n">future</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">make_future_dataframe</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">n_historic_predictions</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">forecast</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
 <span class="n">m</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">highlight_nth_step_ahead_of_each_forecast</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span> <span class="c1"># reset highlight</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">plot_last_forecast</span><span class="p">(</span><span class="n">forecast</span><span class="p">)</span>
 </pre></div>
@@ -991,7 +1000,8 @@ WARNING - (NP.plotting.plot) - Legend is available only for the ten first handle
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="n">forecast</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">df_hourly</span><span class="p">)</span>
+<span></span><span class="n">future</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">make_future_dataframe</span><span class="p">(</span><span class="n">df_hourly</span><span class="p">)</span>
+<span class="n">forecast</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">future</span><span class="p">)</span>
 <span class="n">m</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">highlight_nth_step_ahead_of_each_forecast</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">plot_last_forecast</span><span class="p">(</span><span class="n">forecast</span><span class="p">,</span> <span class="n">include_previous_forecasts</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>

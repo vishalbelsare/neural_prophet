@@ -1,6 +1,12 @@
+
+```{_my-reference-label}
+
+```
+
 # Quick Start Guide
-This page contains details of how you can build a simple model using NeuralProphet with 
-minimal features.
+
+
+This page contains details of how you can build a simple model using NeuralProphet with minimal features.
 
 ## Install
 After downloading the code repository (via `git clone`), change to the repository directory (`cd neural_prophet`) and install neuralprophet as python package with
@@ -14,7 +20,6 @@ Now you can use NeuralProphet in your code:
 ```python
 from neuralprophet import NeuralProphet
 ```
-
  
 ## Input Data
 
@@ -71,7 +76,7 @@ With the forecasts obtained from the model, you can visualize them.
 forecasts_plot = m.plot(forecast)
 ```
 
-![plot-forecasts-1](images/plot_forecasts_simple_1.png){: style="height:350px"}
+![plot-forecasts-1](images/plot_forecast_simple_model_1.png){: style="height:350px"}
 
 This is a simple model with a trend, a weekly seasonality and a yearly seasonality estimated by default. 
 You can also look at the individual components separately as below. 

@@ -41,6 +41,7 @@ extensions = [
     "nbsphinx",
     "nbsphinx_link",
     "sphinx_fontawesome",
+    "sphinx.ext.intersphinx",
 ]
 
 

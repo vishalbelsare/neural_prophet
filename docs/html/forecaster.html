@@ -179,6 +179,7 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
+<li class="toctree-l1"><a class="reference internal" href="full_simple_model.html">Full Simple Model</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="model-overview.html">Model Overview</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle child pages in navigation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="trend.html">Trend</a></li>
 <li class="toctree-l2"><a class="reference internal" href="seasonality.html">Seasonality</a></li>
@@ -189,6 +190,7 @@
 <li class="toctree-l2"><a class="reference internal" href="hyperparameter-selection.html">Hyperparameter-selection</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="changes-from-prophet.html">Changes from Prophet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribution</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Feature Tutorials</span></p>
@@ -203,11 +205,17 @@
 <li class="toctree-l1"><a class="reference internal" href="sparse_autoregression_yosemite_temps.html">Sparse Autoregression</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sub_daily_data_yosemite_temps.html">Sub-daily data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="trend_peyton_manning.html">Fitting a changing trend</a></li>
+<li class="toctree-l1"><a class="reference internal" href="global_modeling.html">Global Model</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Application Tutorials</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html">Building load forecasting: Hospital in SF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-Auto-Regression">1-step ahead forecast with Auto-Regression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="energy_hospital_load.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 <li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html">Renewable Energy: Forecasting hourly solar irradiance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regresseion">1-step ahead forecast with Auto-Regresseion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-Auto-Regression-including-Integration">1-step ahead forecast with Auto-Regression including Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="energy_solar_pv.html#1-step-ahead-forecast-with-AR-Net:-Using-a-Neural-Network">1 step ahead forecast with AR-Net: Using a Neural Network</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Code Documentations</span></p>
 <ul class="current">
@@ -261,20 +269,19 @@ Can be regualrized and configured to model nonlinear relationships.</p>
 <span class="sig-name descname"><span class="pre">add_country_holidays</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">country_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regularization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'additive'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.forecaster.NeuralProphet.add_country_holidays" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a country into the NeuralProphet object to include country specific holidays
 and create the corresponding configs such as lower, upper windows and the regularization
-parameters
-:param country_name: name of the country
-:type country_name: string
-:param lower_window: the lower window for all the country holidays
-:type lower_window: int
-:param upper_window: the upper window for all the country holidays
-:type upper_window: int
-:param regularization: optional  scale for regularization strength
-:type regularization: float
-:param mode: ‘additive’ (default) or ‘multiplicative’.
-:type mode: str</p>
+parameters</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>NeuralProphet object</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>country_name</strong> (<em>string</em>) – name of the country</p></li>
+<li><p><strong>lower_window</strong> (<em>int</em>) – the lower window for all the country holidays</p></li>
+<li><p><strong>upper_window</strong> (<em>int</em>) – the upper window for all the country holidays</p></li>
+<li><p><strong>regularization</strong> (<em>float</em>) – optional  scale for regularization strength</p></li>
+<li><p><strong>mode</strong> (<em>str</em>) – ‘additive’ (default) or ‘multiplicative’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>NeuralProphet object</p>
 </dd>
 </dl>
 </dd></dl>
@@ -325,20 +332,18 @@ if ‘auto’, binary regressors will not be normalized.</p></li>
 <span class="sig-name descname"><span class="pre">add_lagged_regressor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">names</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regularization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_last_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.forecaster.NeuralProphet.add_lagged_regressor" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add a covariate or list of covariate time series as additional lagged regressors to be used for fitting and predicting.
 The dataframe passed to <cite>fit</cite> and <cite>predict</cite> will have the column with the specified name to be used as
-lagged regressor. When normalize=True, the covariate will be normalized unless it is binary.
-:param names: name of the regressor/list of regressors.
-:type names: string or list
-:param regularization: optional  scale for regularization strength
-:type regularization: float
-:param normalize: optional, specify whether this regressor will be</p>
-<blockquote>
-<div><p>normalized prior to fitting.
-if ‘auto’, binary regressors will not be normalized.</p>
-</div></blockquote>
+lagged regressor. When normalize=True, the covariate will be normalized unless it is binary.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>only_last_value</strong> (<em>bool</em>) – False (default) use same number of lags as auto-regression
-True: only use last known value as input</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>names</strong> (<em>string</em><em> or </em><em>list</em>) – name of the regressor/list of regressors.</p></li>
+<li><p><strong>regularization</strong> (<em>float</em>) – optional  scale for regularization strength</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em>) – optional, specify whether this regressor will be
+normalized prior to fitting.
+if ‘auto’, binary regressors will not be normalized.</p></li>
+<li><p><strong>only_last_value</strong> (<em>bool</em>) – False (default) use same number of lags as auto-regression
+True: only use last known value as input</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>NeuralProphet object</p>
@@ -355,9 +360,9 @@ Note: regularization and mode (additive/multiplicative) are set in the main init
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> – string name of the seasonality component.</p></li>
-<li><p><strong>period</strong> – float number of days in one period.</p></li>
-<li><p><strong>fourier_order</strong> – int number of Fourier components to use.</p></li>
+<li><p><strong>name</strong> (<em>string</em>) – name of the seasonality component.</p></li>
+<li><p><strong>period</strong> (<em>float</em>) – number of days in one period.</p></li>
+<li><p><strong>fourier_order</strong> (<em>int</em>) – number of Fourier components to use.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -430,7 +435,7 @@ Any valid frequency for pd.date_range, such as ‘5min’, ‘D’, ‘MS’ or 
 </dd></dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="neuralprophet.forecaster.NeuralProphet.fit">
-<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validation_df</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progress_bar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_live_loss</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progress_print</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.forecaster.NeuralProphet.fit" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validation_df</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progress</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bar'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.forecaster.NeuralProphet.fit" title="Permalink to this definition">¶</a></dt>
 <dd><p>Train, and potentially evaluate model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -438,14 +443,19 @@ Any valid frequency for pd.date_range, such as ‘5min’, ‘D’, ‘MS’ or 
 <li><p><strong>df</strong> (<em>pd.DataFrame</em><em>, </em><em>dict</em>) – dataframe, list of dataframes or dict of dataframes containing column ‘ds’, ‘y’ with all data</p></li>
 <li><p><strong>freq</strong> (<em>str</em>) – Data step sizes. Frequency of data recording,
 Any valid frequency for pd.date_range, such as ‘5min’, ‘D’, ‘MS’ or ‘auto’ (default) to automatically set frequency.</p></li>
-<li><p><strong>epochs</strong> (<em>int</em>) – number of epochs to train.
-default: if not specified, uses self.epochs</p></li>
 <li><p><strong>validation_df</strong> (<em>pd.DataFrame</em><em>, </em><em>dict</em>) – if provided, model with performance  will be evaluated
 after each training epoch over this data.</p></li>
-<li><p><strong>progress_bar</strong> (<em>bool</em>) – display updating progress bar (tqdm)</p></li>
-<li><p><strong>plot_live_loss</strong> (<em>bool</em>) – plot live training loss,
-requires [live] install or livelossplot package installed.</p></li>
-<li><p><strong>progress_print</strong> (<em>bool</em>) – if no progress_bar, whether to print out progress</p></li>
+<li><p><strong>epochs</strong> (<em>int</em>) – number of epochs to train (overrides default setting).
+default: if not specified, uses self.epochs</p></li>
+<li><p><strong>progress</strong> (<em>str</em>) – <p>Method of progress display: [“bar”, “print”, “plot”, “plot-all”, “none”]
+“bar”: display updating progress bar (tqdm)
+“print” print out progress (fallback option)
+“plot”: plot a live updating graph of the training loss,</p>
+<blockquote>
+<div><p>requires [live] install or livelossplot package installed.</p>
+</div></blockquote>
+<p>”plot-all”: “plot” extended to all recorded metrics.</p>
+</p></li>
 <li><p><strong>minimal</strong> (<em>bool</em>) – whether to train without any printouts or metrics collection</p></li>
 </ul>
 </dd>
@@ -468,20 +478,19 @@ default: None.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="neuralprophet.forecaster.NeuralProphet.plot">
 <span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fcst</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ds'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'y'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">(10,</span> <span class="pre">6)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.forecaster.NeuralProphet.plot" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plot the NeuralProphet forecast, including history.
-:param fcst: output of self.predict.
-:type fcst: pd.DataFrame
-:param ax: Optional, matplotlib axes on which to plot.
-:type ax: matplotlib axes
-:param xlabel: label name on X-axis
-:type xlabel: string
-:param ylabel: label name on Y-axis
-:type ylabel: string
-:param figsize: width, height in inches. default: (10, 6)
-:type figsize: tuple</p>
+<dd><p>Plot the NeuralProphet forecast, including history.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>A matplotlib figure.</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fcst</strong> (<em>pd.DataFrame</em>) – output of self.predict.</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib axes</em>) – Optional, matplotlib axes on which to plot.</p></li>
+<li><p><strong>xlabel</strong> (<em>string</em>) – label name on X-axis</p></li>
+<li><p><strong>ylabel</strong> (<em>string</em>) – label name on Y-axis</p></li>
+<li><p><strong>figsize</strong> (<em>tuple</em>) – width, height in inches. default: (10, 6)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A matplotlib figure.</p>
 </dd>
 </dl>
 </dd></dl>
