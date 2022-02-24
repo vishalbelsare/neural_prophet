@@ -69,7 +69,9 @@ Next, we obtain the forecast and visualize our data... et voila 👩🏼‍🎨
 .. image:: images/plot_forecast_simple_model_1.png 
   :align: center
 
-Checkout the :ref:`my-reference-label2` description for additional basic features of NeuralProphet. 
+
+.. note::
+  Congrats! 🥳 You successfully trained your first NeuralProphet model! Checkout the :ref:`my-reference-label2` description for additional basic features of NeuralProphet. 🚀
 
 
 .. toctree::

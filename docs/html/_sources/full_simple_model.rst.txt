@@ -142,8 +142,8 @@ Note that you have to explicitly set the random seed to the same random number e
 
 .. note::
 
-  Congrats! 🥳 You successfully trained your first NeuralProphet model!
-  Let's solve some real world applications and head over to the advanced Tutorials to your left! 
+  Congrats on completing the full simple model tutorial! 🥳 
+  Let's solve some real world applications and head over to the advanced Tutorials to your left! 🏄🏼‍♂️
 
 
 
