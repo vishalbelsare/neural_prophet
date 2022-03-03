@@ -115,8 +115,8 @@ class Train:
         n_data: int,
         min_batch: int = 16,
         max_batch: int = 512,
-        min_epoch: int = 20,
-        max_epoch: int = 200,
+        min_epoch: int = 10,
+        max_epoch: int = 1000,
     ):
         assert n_data >= 1
         self.n_data = n_data
@@ -126,7 +126,8 @@ class Train:
             self.batch_size = min(self.n_data, self.batch_size)
             log.info("Auto-set batch_size to {}".format(self.batch_size))
         if self.epochs is None:
-            self.epochs = int((2 ** (2 * np.log10(n_data))) / (n_data / 1000.0))
+            # this should (with auto batch size) yield about 1000 steps minimum and 100,000 steps at upper cutoff
+            self.epochs = int(2 ** (2.5 * np.log10(100 + n_data)) / (n_data / 1000.0))
             self.epochs = min(max_epoch, max(min_epoch, self.epochs))
             log.info("Auto-set epochs to {}".format(self.epochs))
         # also set lambda_delay:
@@ -161,8 +162,7 @@ class Train:
             delay_weight = 1
         return delay_weight
 
-    def find_learning_rate(self, model, dataset, repeat: int = 3):
-        # return 0.1
+    def find_learning_rate(self, model, dataset, repeat: int = 2):
         if issubclass(self.loss_func.__class__, torch.nn.modules.loss._Loss):
             try:
                 loss_func = getattr(torch.nn.modules.loss, self.loss_func_name)()
@@ -170,7 +170,7 @@ class Train:
                 raise ValueError("automatic learning rate only supported for regular torch loss functions.")
         else:
             raise ValueError("automatic learning rate only supported for regular torch loss functions.")
-        lrs = []
+        lrs = [0.1]
         for i in range(repeat):
             lr = utils_torch.lr_range_test(
                 model,
@@ -180,7 +180,7 @@ class Train:
                 batch_size=self.batch_size,
             )
             lrs.append(lr)
-        lrs_log10_mean = sum([np.log10(x) for x in lrs]) / repeat
+        lrs_log10_mean = sum([np.log10(x) for x in lrs]) / len(lrs)
         learning_rate = 10 ** lrs_log10_mean
         return learning_rate
 
