@@ -264,6 +264,83 @@
 <p>A simple yet powerful forecaster that models:
 Trend, seasonality, events, holidays, auto-regression, lagged covariates, and future-known regressors.
 Can be regualrized and configured to model nonlinear relationships.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>growth</strong> (<em>str</em>) – [‘off’, ‘linear’] to specify
+no trend or a linear trend.
+Note: ‘discontinuous’ setting is actually not a trend per se. only use if you know what you do.</p></li>
+<li><p><strong>changepoints</strong> (<em>list</em>) – Dates at which to include potential changepoints.
+If not specified, potential changepoints are selected automatically.
+data format: list of str, list of np.datetimes, np.array of np.datetimes (not np.array of np.str)</p></li>
+<li><p><strong>n_changepoints</strong> (<em>int</em>) – Number of potential changepoints to include.
+Changepoints are selected uniformly from the first <cite>changepoint_range</cite> proportion of the history.
+Not used if input <cite>changepoints</cite> is supplied. If <cite>changepoints</cite> is not supplied.</p></li>
+<li><p><strong>changepoints_range</strong> (<em>float</em>) – Proportion of history in which trend changepoints will
+be estimated. Defaults to 0.8 for the first 80%. Not used if <cite>changepoints</cite> is specified.</p></li>
+<li><p><strong>trend_reg</strong> (<em>float</em>) – Parameter modulating the flexibility of the automatic changepoint selection.
+Large values (~1-100) will limit the variability of changepoints.
+Small values (~0.001-1.0) will allow changepoints to change faster.
+default: 0 will fully fit a trend to each segment.</p></li>
+<li><p><strong>trend_reg_threshold</strong> (<em>bool</em><em>, </em><em>float</em>) – Allowance for trend to change without regularization.
+True: Automatically set to a value that leads to a smooth trend.
+False: All changes in changepoints are regularized</p></li>
+<li><p><strong>yearly_seasonality</strong> (<em>bool</em><em>, </em><em>int</em>) – Fit yearly seasonality.
+Can be ‘auto’, True, False, or a number of Fourier/linear terms to generate.</p></li>
+<li><p><strong>weekly_seasonality</strong> (<em>bool</em><em>, </em><em>int</em>) – Fit monthly seasonality.
+Can be ‘auto’, True, False, or a number of Fourier/linear terms to generate.</p></li>
+<li><p><strong>daily_seasonality</strong> (<em>bool</em><em>, </em><em>int</em>) – Fit daily seasonality.
+Can be ‘auto’, True, False, or a number of Fourier/linear terms to generate.</p></li>
+<li><p><strong>seasonality_mode</strong> (<em>str</em>) – ‘additive’ (default) or ‘multiplicative’.</p></li>
+<li><p><strong>seasonality_reg</strong> (<em>float</em>) – Parameter modulating the strength of the seasonality model.
+Smaller values (~0.1-1) allow the model to fit larger seasonal fluctuations,
+larger values (~1-100) dampen the seasonality.
+default: None, no regularization</p></li>
+<li><p><strong>n_lags</strong> (<em>int</em>) – Previous time series steps to include in auto-regression. Aka AR-order</p></li>
+<li><p><strong>ar_sparsity</strong> (<em>float</em>) – [0-1], how much sparsity to enduce in the AR-coefficients.
+Should be around (# nonzero components) / (AR order), eg. 3/100 = 0.03</p></li>
+<li><p><strong>n_forecasts</strong> (<em>int</em>) – Number of steps ahead of prediction time step to forecast.</p></li>
+<li><p><strong>num_hidden_layers</strong> (<em>int</em>) – number of hidden layer to include in AR-Net. defaults to 0.</p></li>
+<li><p><strong>d_hidden</strong> (<em>int</em>) – dimension of hidden layers of the AR-Net. Ignored if num_hidden_layers == 0.</p></li>
+<li><p><strong>learning_rate</strong> (<em>float</em>) – Maximum learning rate setting for 1cycle policy scheduler.
+default: None: Automatically sets the learning_rate based on a learning rate range test.
+For manual values, try values ~0.001-10.</p></li>
+<li><p><strong>epochs</strong> (<em>int</em>) – Number of epochs (complete iterations over dataset) to train model.
+default: None: Automatically sets the number of epochs based on dataset size.
+For best results also leave batch_size to None.
+For manual values, try ~5-500.</p></li>
+<li><p><strong>batch_size</strong> (<em>int</em>) – Number of samples per mini-batch.
+default: None: Automatically sets the batch_size based on dataset size.
+For best results also leave epochs to None.
+For manual values, try ~1-512.</p></li>
+<li><p><strong>loss_func</strong> (<em>str</em><em>, </em><em>torch.nn.modules.loss._Loss</em><em>, </em><em>'typing.Callable'</em>) – Type of loss to use: str [‘Huber’, ‘MSE’, ‘MAE’],
+or torch loss or callable for custom loss, eg. asymmetric Huber loss</p></li>
+<li><p><strong>collect_metrics</strong> (<em>list</em><em>, </em><em>bool</em>) – the names of metrics to compute. Valid: [‘mae’, ‘rmse’, ‘mse’]
+True (default): [‘mae’, ‘rmse’]
+False: No metrics</p></li>
+<li><p><strong>impute_missing</strong> (<em>bool</em>) – whether to automatically impute missing dates/values
+imputation follows a linear method up to 10 missing values, more are filled with trend.</p></li>
+<li><p><strong>normalize</strong> (<em>str</em>) – <p>Type of normalization to apply to the time series.
+default: ‘soft’, unless the time series is binary, in which case ‘minmax’ is applied.
+options: [ ‘off’, ‘minmax, ‘standardize’, ‘soft’, ‘soft1’]</p>
+<blockquote>
+<div><ul>
+<li><p>’off’ bypasses data normalization</p></li>
+<li><p>’minmax’ scales the minimum value to 0.0 and the maximum value to 1.0</p></li>
+<li><p>’standardize’ zero-centers and divides by the standard deviation</p></li>
+<li><p>’soft’ scales the minimum value to 0.0 and the 95th quantile to 1.0</p></li>
+<li><p>’soft1’ scales the minimum value to 0.1 and the 90th quantile to 0.9</p></li>
+</ul>
+</div></blockquote>
+</p></li>
+<li><p><strong>global_normalization</strong> (<em>bool</em>) – when set to true and dict of dataframes are used as global_time_normalization,
+input global data params are considered - default is local normalization.</p></li>
+<li><p><strong>global_time_normalization</strong> (<em>bool</em>) – set time data_params locally when set to false,
+only valid in case of global modeling local normalization (default)</p></li>
+<li><p><strong>unknown_data_normalization</strong> (<em>bool</em>) – when unknown_data_normalization is set to True, test data is normalized with global data params even if trained with local data params (global modeling with local normalization)</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="neuralprophet.forecaster.NeuralProphet.add_country_holidays">
 <span class="sig-name descname"><span class="pre">add_country_holidays</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">country_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regularization</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'additive'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.forecaster.NeuralProphet.add_country_holidays" title="Permalink to this definition">¶</a></dt>
@@ -440,21 +517,23 @@ Any valid frequency for pd.date_range, such as ‘5min’, ‘D’, ‘MS’ or 
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>pd.DataFrame</em><em>, </em><em>dict</em>) – dataframe, list of dataframes or dict of dataframes containing column ‘ds’, ‘y’ with all data</p></li>
+<li><p><strong>df</strong> (<em>pd.DataFrame</em><em>, </em><em>dict</em>) – pd.DataFrame or dict of dataframes containing column ‘ds’, ‘y’ with all data</p></li>
 <li><p><strong>freq</strong> (<em>str</em>) – Data step sizes. Frequency of data recording,
 Any valid frequency for pd.date_range, such as ‘5min’, ‘D’, ‘MS’ or ‘auto’ (default) to automatically set frequency.</p></li>
 <li><p><strong>validation_df</strong> (<em>pd.DataFrame</em><em>, </em><em>dict</em>) – if provided, model with performance  will be evaluated
 after each training epoch over this data.</p></li>
 <li><p><strong>epochs</strong> (<em>int</em>) – number of epochs to train (overrides default setting).
 default: if not specified, uses self.epochs</p></li>
-<li><p><strong>progress</strong> (<em>str</em>) – <p>Method of progress display: [“bar”, “print”, “plot”, “plot-all”, “none”]
-“bar”: display updating progress bar (tqdm)
-“print” print out progress (fallback option)
-“plot”: plot a live updating graph of the training loss,</p>
+<li><p><strong>progress</strong> (<em>str</em>) – <p>Method of progress display
+options: [“bar”, “print”, “plot”, “plot-all”, “none”]</p>
 <blockquote>
-<div><p>requires [live] install or livelossplot package installed.</p>
+<div><ul>
+<li><p>”bar” display updating progress bar (tqdm)</p></li>
+<li><p>”print” print out progress (fallback option)</p></li>
+<li><p>”plot” plot a live updating graph of the training loss, requires [live] install or livelossplot package installed.</p></li>
+<li><p>”plot-all” “plot” extended to all recorded metrics.</p></li>
+</ul>
 </div></blockquote>
-<p>”plot-all”: “plot” extended to all recorded metrics.</p>
 </p></li>
 <li><p><strong>minimal</strong> (<em>bool</em>) – whether to train without any printouts or metrics collection</p></li>
 </ul>
@@ -543,7 +622,7 @@ None (default):  automatic (10, 3 * npanel)</p></li>
 0 (default) starts the week on Sunday. 1 shifts by 1 day to Monday, and so on.</p></li>
 <li><p><strong>yearly_start</strong> (<em>int</em>) – specifying the start day of the yearly seasonality plot.
 0 (default) starts the year on Jan 1. 1 shifts by 1 day to Jan 2, and so on.</p></li>
-<li><p><strong>df_name</strong> – name of dataframe to refer to data params from original list of train dataframes (used for local normalization in global modeling)</p></li>
+<li><p><strong>df_name</strong> – name of dataframe to refer to data params from original keys of train dataframes (used for local normalization in global modeling)</p></li>
 <li><p><strong>figsize</strong> (<em>tuple</em>) – width, height in inches.
 None (default):  automatic (10, 3 * npanel)</p></li>
 </ul>
@@ -571,26 +650,21 @@ False (default): returns forecasts sorted by target (highlighting forecast age)<
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><blockquote>
-<div><dl class="simple">
-<dt>df_raw (pandas DataFrame): columns ‘ds’, ‘y’, and [‘step&lt;i&gt;’]</dt><dd><p>where step&lt;i&gt; refers to the i-step-ahead prediction <em>made at</em> this row’s datetime.
+<dd class="field-even"><p><dl class="simple">
+<dt>df_raw (if raw=True):</dt><dd><p>columns ‘ds’, ‘y’, and [‘step&lt;i&gt;’] where step&lt;i&gt; refers to the i-step-ahead
+prediction <em>made at</em> this row’s datetime.
 e.g. step3 is the prediction for 3 steps into the future,
 predicted using information up to (excluding) this datetime.</p>
 </dd>
-</dl>
-</div></blockquote>
-<dl class="simple">
-<dt>else:</dt><dd><dl class="simple">
-<dt>df_forecast (pandas DataFrame or list of Dataframes): columns ‘ds’, ‘y’, ‘trend’ and [‘yhat&lt;i&gt;’]</dt><dd><p>where yhat&lt;i&gt; refers to the i-step-ahead prediction for this row’s datetime.
+<dt>df_forecast (otherwise):</dt><dd><p>columns ‘ds’, ‘y’, ‘trend’ and [‘yhat&lt;i&gt;’] where yhat&lt;i&gt; refers to
+the i-step-ahead prediction for this row’s datetime.
 e.g. yhat3 is the prediction for this datetime, predicted 3 steps ago, “3 steps old”.</p>
-</dd>
-</dl>
 </dd>
 </dl>
 </p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>if raw</p>
+<dd class="field-odd"><p>pd.DataFrame or dict of pd.DataFrame</p>
 </dd>
 </dl>
 </dd></dl>
@@ -603,7 +677,10 @@ e.g. yhat3 is the prediction for this datetime, predicted 3 steps ago, “3 step
 <dd class="field-odd"><p><strong>df</strong> (<em>pd.DataFrame</em><em>, </em><em>dict</em>) – dataframe or dict of dataframes containing column ‘ds’, prediction dates</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>pd.Dataframe or list of pd.Dataframe with seasonal components. with columns of name &lt;seasonality component name&gt;</p>
+<dd class="field-even"><p>seasonal components with columns of name &lt;seasonality component name&gt;</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>df (pd.DataFrame, dict)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -616,7 +693,10 @@ e.g. yhat3 is the prediction for this datetime, predicted 3 steps ago, “3 step
 <dd class="field-odd"><p><strong>df</strong> (<em>pd.DataFrame</em><em>, </em><em>dict</em>) – dataframe or dict of dataframes  containing column ‘ds’, prediction dates</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>pd.Dataframe, list or dict of pd.Dataframe with trend on prediction dates.</p>
+<dd class="field-even"><p>trend on prediction dates.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>df (dict, pd.DataFrame)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -644,15 +724,20 @@ Also performs basic data checks and fills in missing data.</p>
 Any valid frequency for pd.date_range, such as ‘5min’, ‘D’, ‘MS’ or ‘auto’ (default) to automatically set frequency.</p></li>
 <li><p><strong>valid_p</strong> (<em>float</em>) – fraction of data to use for holdout validation set
 Targets will still never be shared.</p></li>
-<li><p><strong>local_split</strong> (<em>bool</em>) – Each dataframe will be split according to valid_p locally in case of global normalization (list or dict input) - especially useful in case of local normalization</p></li>
+<li><p><strong>local_split</strong> (<em>bool</em>) – Each dataframe will be split according to valid_p locally (in case of dict of dataframes)</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>training data
-df_val (pd.DataFrame): validation data</p>
+<dd class="field-even"><p><dl class="simple">
+<dt>df_train (pd.DataFrame):</dt><dd><p>training data</p>
+</dd>
+<dt>df_val (pd.DataFrame):</dt><dd><p>validation data</p>
+</dd>
+</dl>
+</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>df_train (pd.DataFrame)</p>
+<dd class="field-odd"><p>tuple of two pd.DataFrames</p>
 </dd>
 </dl>
 </dd></dl>
@@ -662,7 +747,7 @@ df_val (pd.DataFrame): validation data</p>
 <dd><p>Evaluate model on holdout data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>df</strong> (<em>pd.DataFrame</em><em>,</em><em>list</em><em>,</em><em>dict</em>) – dataframe, list of dataframes or dict of dataframes containing column ‘ds’, ‘y’ with with holdout data</p>
+<dd class="field-odd"><p><strong>df</strong> (<em>pd.DataFrame</em><em>,</em><em>dict</em>) – dataframe or dict of dataframes containing column ‘ds’, ‘y’ with with holdout data</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>df with evaluation metrics</p>

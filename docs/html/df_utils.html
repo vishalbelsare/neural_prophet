@@ -298,7 +298,7 @@ Any valid frequency for pd.date_range, such as ‘D’ or ‘M’</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>pd.DataFrame or dict of pd.DataFrame</p>
+<dd class="field-even"><p>(pd.DataFrame,dict) checked df</p>
 </dd>
 </dl>
 </dd></dl>
@@ -323,6 +323,21 @@ Any valid frequency for pd.date_range, such as ‘D’ or ‘M’</p></li>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="neuralprophet.df_utils.compare_dict_keys">
+<span class="sig-prename descclassname"><span class="pre">neuralprophet.df_utils.</span></span><span class="sig-name descname"><span class="pre">compare_dict_keys</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict_2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_dict_1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_dict_2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.df_utils.compare_dict_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compare keys of two different dicts (i.e., events and dataframes).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dict_1</strong> (<em>dict</em>) – first dict</p></li>
+<li><p><strong>dict_2</strong> (<em>dict</em>) – second dict</p></li>
+<li><p><strong>name_dict_1</strong> (<em>str</em>) – name of first dict</p></li>
+<li><p><strong>name_dict_2</strong> (<em>str</em>) – name of second dict</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -484,7 +499,7 @@ Note: window width is rolling + 2*limit_linear</p></li>
 <dl class="py function">
 <dt class="sig sig-object py" id="neuralprophet.df_utils.find_time_threshold">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.df_utils.</span></span><span class="sig-name descname"><span class="pre">find_time_threshold</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_lags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs_overbleed</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.df_utils.find_time_threshold" title="Permalink to this definition">¶</a></dt>
-<dd><p>Find time threshold for dividing list of timeseries into train and validation sets.
+<dd><p>Find time threshold for dividing timeseries into train and validation sets.
 Prevents overbleed of targets. Overbleed of inputs can be configured.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -496,7 +511,7 @@ Prevents overbleed of targets. Overbleed of inputs can be configured.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>time stamp in which list of dataframe will be split into train and validation sets.</p>
+<dd class="field-even"><p>time stamp threshold defines the boundary for the train and validation sets split.</p>
 </dd>
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p>threshold_time_stamp (str)</p>
@@ -532,17 +547,19 @@ Prevents overbleed of targets. Overbleed of inputs can be configured.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="neuralprophet.df_utils.infer_frequency">
 <span class="sig-prename descclassname"><span class="pre">neuralprophet.df_utils.</span></span><span class="sig-name descname"><span class="pre">infer_frequency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_lags</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_freq_percentage</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#neuralprophet.df_utils.infer_frequency" title="Permalink to this definition">¶</a></dt>
-<dd><p>Automatically infers frequency of dataframe or list of dataframes.</p>
+<dd><p>Automatically infers frequency of dataframe or dict of dataframes.
+:param df: data
+:type df: pd.DataFrame,dict
+:param n_lags: identical to NeuralProphet
+:type n_lags: int
+:param freq: Data step sizes. Frequency of data recording,</p>
+<blockquote>
+<div><p>Any valid frequency for pd.date_range, such as ‘5min’, ‘D’, ‘MS’ or ‘auto’ (default) to automatically set frequency.</p>
+</div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>df</strong> (<em>pd.DataFrame</em><em>,</em><em>dict</em>) – data</p></li>
-<li><p><strong>freq</strong> (<em>str</em>) – Data step sizes. Frequency of data recording,
-Any valid frequency for pd.date_range, such as ‘5min’, ‘D’, ‘MS’ or ‘auto’ (default) to automatically set frequency.</p></li>
-<li><p><strong>n_lags</strong> (<em>int</em>) – identical to NeuralProphet</p></li>
-<li><p><strong>min_freq_percentage</strong> (<em>float</em>) – threshold for defining major frequency of data
-default: 0.7</p></li>
-</ul>
+<dd class="field-odd"><p><strong>min_freq_percentage</strong> (<em>float</em>) – threshold for defining major frequency of data
+default: 0.7</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>Valid frequency tag according to major frequency.</p>
@@ -628,7 +645,7 @@ Any valid frequency for pd.date_range, such as ‘D’ or ‘M’</p></li>
 <dd class="field-even"><p>input df with ‘ds’ extended into future, and ‘y’ set to None</p>
 </dd>
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>df2 (pd.DataFrame)</p>
+<dd class="field-odd"><p>future_df (pd.DataFrame)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -717,15 +734,15 @@ with ShiftScale entries containing ‘shift’ and ‘scale’ parameters</p></l
 :type n_forecasts: int
 :param inputs_overbleed: Whether to allow last training targets to be first validation inputs (never targets)
 :type inputs_overbleed: bool
-:param threshold_time_stamp: time stamp that defines splitting of data
+:param threshold_time_stamp: time stamp boundary that defines splitting of data
 :type threshold_time_stamp: str</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>training data
-df_val (pd.DataFrame, list or dict): validation data</p>
+df_val (pd.DataFrame, dict): validation data</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p>df_train (pd.DataFrame, list or dict)</p>
+<dd class="field-even"><p>df_train (pd.DataFrame, dict)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -743,7 +760,7 @@ df_val (pd.DataFrame, list or dict): validation data</p>
 <li><p><strong>valid_p</strong> (<em>float</em><em>, </em><em>int</em>) – fraction (0,1) of data to use for holdout validation set,
 or number of validation samples &gt;1</p></li>
 <li><p><strong>inputs_overbleed</strong> (<em>bool</em>) – Whether to allow last training targets to be first validation inputs (never targets)</p></li>
-<li><p><strong>local_normalization</strong> (<em>bool</em>) – when set to true each episode from list of dataframes will be considered locally (in case of Global modeling) - in this case a dict of dataframes should be the input</p></li>
+<li><p><strong>local_split</strong> (<em>bool</em>) – when set to true, each episode from a dict of dataframes will be split locally</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
