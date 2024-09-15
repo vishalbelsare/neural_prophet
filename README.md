@@ -1,9 +1,9 @@
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/ourownstory/neural_prophet?logo=github)](https://github.com/ourownstory/neural_prophet/releases)
 [![Pypi_Version](https://img.shields.io/pypi/v/neuralprophet.svg)](https://pypi.python.org/pypi/neuralprophet)
-[![Python Version](https://img.shields.io/badge/python-3.6+-blue?logo=python)](https://www.python.org/)
+[![Python Version](https://img.shields.io/badge/python-3.9+-blue?logo=python)](https://www.python.org/)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![License](https://img.shields.io/badge/license-MIT-brightgreen)](https://opensource.org/licenses/MIT)
-[![Tests](https://github.com/ourownstory/neural_prophet/actions/workflows/ci.yml/badge.svg)](https://github.com/ourownstory/neural_prophet/actions/workflows/ci.yml)
+[![Tests](https://github.com/ourownstory/neural_prophet/actions/workflows/tests.yml/badge.svg)](https://github.com/ourownstory/neural_prophet/actions/workflows/tests.yml)
 [![codecov](https://codecov.io/gh/ourownstory/neural_prophet/branch/master/graph/badge.svg?token=U5KXCL55DW)](https://codecov.io/gh/ourownstory/neural_prophet)
 [![Slack](https://img.shields.io/badge/slack-@neuralprophet-CF0E5B.svg?logo=slack&logoColor=white&labelColor=3F0E40)](https://neuralprophet.slack.com/join/shared_invite/zt-sgme2rw3-3dCH3YJ_wgg01IXHoYaeCg#/shared-invite/email)
 [![Downloads](https://static.pepy.tech/personalized-badge/neuralprophet?period=total&units=international_system&left_color=black&right_color=blue&left_text=Downloads)](https://pepy.tech/project/neuralprophet)
@@ -13,11 +13,16 @@
 
 Please note that the project is still in beta phase. Please report any issues you encounter or suggestions you have. We will do our best to address them quickly. Contributions are very welcome!
 
-# NeuralProphet
-A Neural Network based Time-Series model, inspired by [Facebook Prophet](https://github.com/facebook/prophet) and [AR-Net](https://github.com/ourownstory/AR-Net), built on PyTorch.
+# NeuralProphet: human-centered forecasting
+NeuralProphet is an easy to learn framework for interpretable time series forecasting.
+NeuralProphet is built on PyTorch and combines Neural Networks and traditional time-series algorithms, inspired by [Facebook Prophet](https://github.com/facebook/prophet) and [AR-Net](https://github.com/ourownstory/AR-Net).
+- With a few lines of code, you can define, customize, visualize, and evaluate your own forecasting models.
+- It is designed for iterative human-in-the-loop model building. That means that you can build a first model quickly, interpret the results, improve, repeat. Due to the focus on interpretability and customization-ability, NeuralProphet may not be the most accurate model out-of-the-box; so, don't hesitate to adjust and iterate until you like your results.
+- NeuralProphet is best suited for time series data that is of higher-frequency (sub-daily) and longer duration (at least two full periods/years).
+
 
 ## Documentation
-The [documentation page](https://neuralprophet.com) may not we entirely up to date. Docstrings should be reliable, please refer to those when in doubt. We are working on an improved documentation. We appreciate any help to improve and update the docs.
+The [documentation page](https://neuralprophet.com) may not be entirely up to date. Docstrings should be reliable, please refer to those when in doubt. We are working on an improved documentation. We appreciate any help to improve and update the docs.
 
 For a visual introduction to NeuralProphet, [view this presentation](notes/NeuralProphet_Introduction.pdf).
 
@@ -26,7 +31,7 @@ We compiled a [Contributing to NeuralProphet](CONTRIBUTING.md) page with practic
 
 ## Community
 #### Discussion and Help
-If you have any question or suggestion, you can participate with [our community right here on Github](https://github.com/ourownstory/neural_prophet/discussions)
+If you have any questions or suggestion, you can participate in [our community right here on Github](https://github.com/ourownstory/neural_prophet/discussions)
 
 #### Slack Chat
 We also have an active [Slack community](https://join.slack.com/t/neuralprophet/shared_invite/zt-sgme2rw3-3dCH3YJ_wgg01IXHoYaeCg). Come and join the conversation!
@@ -34,7 +39,7 @@ We also have an active [Slack community](https://join.slack.com/t/neuralprophet/
 ## Tutorials
 [![Open All Collab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/ourownstory/neural_prophet)
 
-There are several [example notebooks](tutorials/) to help you get started. 
+There are several [example notebooks](docs/source/tutorials) to help you get started. 
 
 You can find the datasets used in the tutorials, including data preprocessing examples, in our [neuralprophet-data repository](https://github.com/ourownstory/neuralprophet-data).
 
@@ -77,37 +82,42 @@ pip install neuralprophet[live]
 ```
 This will allow you to enable `plot_live_loss` in the `fit` function to get a live plot of train (and validation) loss.
 
-If you would like the most up to date version, you can instead install direclty from github:
+If you would like the most up to date version, you can instead install directly from github:
 ```shell
 git clone <copied link from github>
 cd neural_prophet
 pip install .
 ```
 
-## Model features
-* Autocorrelation modelling through AR-Net
-* Piecewise linear trend with optional automatic changepoint detection
-* Fourier term Seasonality at different periods such as yearly, daily, weekly, hourly.
-* Lagged regressors (measured features, e.g temperature sensor)
-* Future regressors (in advance known features, e.g. temperature forecast)
-* Country holidays & recurring special events
-* Sparsity of coefficients through regularization
-* Plotting for forecast components, model coefficients as well as final predictions
-* Automatic selection of training related hyperparameters
-* Support for panel data by building global forecasting models.
+Note for Windows users: Please use WSL2.
 
-### Coming up soon
-For details, please view the [Development Timeline](notes/development_timeline.md).
+## Features
+### Model components
+* Autoregression: Autocorrelation modelling - linear or NN (AR-Net).
+* Trend: Piecewise linear trend with optional automatic changepoint detection.
+* Seasonality: Fourier terms at different periods such as yearly, daily, weekly, hourly.
+* Lagged regressors: Lagged observations (e.g temperature sensor) - linear or NN.
+* Future regressors: In advance known features (e.g. temperature forecast) - linear or NN.
+* Events: Country holidays & recurring custom events.
+* Global Modeling: Components can be local, global or 'glocal' (global + regularized local)
 
-The next versions of NeuralProphet are expected to cover a set of new exciting features:
 
+### Framework features
+* Multiple time series: Fit a global/glocal model with (partially) shared model parameters.
+* Uncertainty: Estimate values of specific quantiles - Quantile Regression.
+* Regularize modelling components.
+* Plotting of forecast components, model coefficients and more.
+* Time series crossvalidation utility.
+* Model checkpointing and validation.
+
+
+### Coming soon<sup>:tm:</sup>
+
+* Cross-relation of lagged regressors.
+* Static metadata regression for multiple series
 * Logistic growth for trend component.
-* Uncertainty estimation of predicted values
-* Incorporate time series featurization for improved forecast accuracy.
-* Model bias modelling/correction with secondary model
-* Multimodal dynamics: unsupervised automatic modality-specific forecast.
 
-For a complete list of all past and near-future changes, please refer to the [changelogs](notes/changelogs.md).
+For a list of past changes, please refer to the [releases page](https://github.com/ourownstory/neural_prophet/releases).
 
 ## Cite
 Please cite [NeuralProphet](https://arxiv.org/abs/2111.15397) in your publications if it helps your research:
@@ -121,7 +131,11 @@ Please cite [NeuralProphet](https://arxiv.org/abs/2111.15397) in your publicatio
       primaryClass={cs.LG}
 }
 ```
+### Many Thanks To Our Contributors:
+<a href="https://github.com/ourownstory/neural_prophet/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=ourownstory/neural_prophet" />
+</a>
 
 ## About
-NeuralProphet is and open-source community project, supported by awesome people like you. 
+NeuralProphet is an open-source community project, supported by awesome people like you. 
 If you are interested in joining the project, please feel free to reach out to me (Oskar) - you can find my email on the [NeuralProphet Paper](https://arxiv.org/abs/2111.15397).

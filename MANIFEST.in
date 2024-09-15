@@ -1,4 +1,2 @@
 prune scripts
 include LICENSE.md
-include requirements.txt
-

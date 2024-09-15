@@ -4,27 +4,27 @@
 Welcome to the Prophet community and thank you for your contribution to its continued legacy. 
 We compiled this page with practical instructions and further resources to help you get started.
 
+For an easy start, check out all open issues with the label https://github.com/ourownstory/neural_prophet/labels/good%20first%20issue. 
+They can be done somewhat in isolation from other tasks and will take a couple hours up to a week of work to complete. We appreciate your help!
+
 Please come join us on our [Slack](https://join.slack.com/t/neuralprophet/shared_invite/zt-sgme2rw3-3dCH3YJ_wgg01IXHoYaeCg), you can message any core dev there.
 
-## Get Started On This
-We created a [overview page](https://github.com/ourownstory/neural_prophet/projects/8) with all tasks where we would appreciate your help! 
-They can be done somewhat in isolation from other tasks and will take a couple hours up to a week of work to complete.
-
 ## Process
-Here's a great [beginner's guide to contributing to a GitHub project](https://akrabat.com/the-beginners-guide-to-contributing-to-a-github-project/#to-sum-up). 
+If this is your first time contributing to NeuralProphet, please read our [wiki summary](https://github.com/ourownstory/neural_prophet/wiki#contributing-process) of the steps involved.
 
-In Summary: 
-* Fork the project & clone locally.
-* Create an upstream remote and sync your local copy before you branch.
-* Branch for each separate piece of work.
-* Do the work, write good commit messages, and read the CONTRIBUTING file if there is one.
-* Push to your origin repository.
-* Create a new PR in GitHub.
-* Respond to any code review feedback.
+## Dev Install using Poetry
+Prerequisite:  [install poetry](https://python-poetry.org/docs/#installing-with-the-official-installer).
+* Start by cloning the repo with `git clone <copied link from github>`.
+* Make sure you have changed directories to your cloned neuralprophet github `cd neural_prophet`. There, run `poetry shell` to (create and) start a (new) poetry virtual environment. If you run `poetry env info --path` you should see the path to the venv.
+* To complete the venv setup, install neuralprophet (in editable mode by default) with `poetry install`.
+Note: poetry will automatically use the specific dependencies in the `poetry.lock` file for reproducibility. If you want to install the latest dependencies instead, run `poetry update`. This will update all dependencies and update the `poetry.lock` file. Be mindful to not track the `poetry.lock` file with git when commiting, unless the purpose of your pull request is to update it.
 
-Please make sure to include tests and documentation with your code.
+Warning, you are still lacking some git hooks to auto-format your code pre-commit and to run pytests pre-push.
+Currently these need to be self-added. Simplified instructions to follow.
 
-## Dev Install
+[Tutorial Link](https://realpython.com/dependency-management-python-poetry/)
+
+## Dev Install (old)
 Before starting it's a good idea to first create and activate a new virtual environment:
 ```
 python3 -m venv <path-to-new-env>
@@ -40,7 +40,7 @@ pip install -e ".[dev]"
 
 Please don't forget to run the dev setup script to install the hooks for black and pytest, and set git to fast forward only:
 ```
-neuralprophet_dev_setup
+neuralprophet_dev_setup.py
 git config pull.ff only 
 ```
 
@@ -49,120 +49,65 @@ Notes:
 * The `neuralprophet_dev_setup` command runs the dev-setup script which installs appropriate git hooks for Black (pre-commit) and PyTest (pre-push).
 * setting git to fast-forward only prevents accidental merges when using `git pull`.
 * To run tests without pushing (or when the hook installation fails), run from neuralprophet folder: `pytest -v`
-* To run black without commiting (or when the hook installation fails): `python -m black {source_file_or_directory}` 
+* To run black without commiting (or when the hook installation fails): `python3 -m black {source_file_or_directory}` 
+* If running `neuralprophet_dev_setup.py` gives you a `no such file` error, try running `python ./scripts/neuralprophet_dev_setup.py`
 
 ## Writing documentation
-NeuralProphet uses the Sphinx documentation framework to build the documentation website, which is hosted via Github Pages on [www.neuralprophet.com](http://www.neuralprophet.com).
+The NeuralProphet documentation website is hosted via GitHub Pages on www.neuralprohet.com. Have a look at the [wiki](https://github.com/ourownstory/neural_prophet/wiki#writing-documentation) on how to write and build documentation.
 
-The documentation's source is enclosed in the docs folder. Whereas the `main` branch only contains the basic source files, the branch `gh-pages` entails the build data (with folders `docs/html` and `docs/doctrees`) and is used for deployment.
+## Best practices
+We follow a set of guidelines and methodologies to ensure that code is of high quality, maintainable, and easily understandable by others who may contribute to the project:
+* [Typing](https://github.com/ourownstory/neural_prophet/wiki#typing): Use type annotations across the project to improve code readability and maintainability
+* [Tests and Code Coverage](https://github.com/ourownstory/neural_prophet/wiki#testing-and-code-coverage): Run tests using 'PyTest' to ensure that the code is functioning as expected.
+* [Continuous Integration](https://github.com/ourownstory/neural_prophet/wiki#continous-integration): Github Actions is used to set up a CI pipeline
+* [Code Style](https://github.com/ourownstory/neural_prophet/wiki#style): Deploy Black, so there is no need to worry about code style and formatting.
 
-### Docstring
+## Prefixes and labels for pull requests and issues
 
-Docstrings need to be formatted according to [NumPy Style](https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html#example-numpy) in order to display their API reference correctly using Spinx. 
-Please refer to [Pandas Docstring Guide](https://pandas.pydata.org/pandas-docs/stable/development/contributing_docstring.html#) for best practices.
+### Prefixes for pull requests
+All pull requests (PR) should have one of the following prefixes:
 
-The length of line inside docstrings block must be limited to 80 characters to fit into Jupyter documentation popups.
+* [breaking] Breaking changes, which require user action (e.g. breaking API changes)
+* [major] Major features worth mentioning (e.g. uncertainty prediction)
+* [minor] Minor changes which are nice to know about (e.g. add sorting to labels in plots)
+* [fix] Bugfixes (e.g. fix for plots not showing up)
+* [docs] Documentation related changes (e.g. add tutorial for energy dataset)
+* [tests] Tests additions and changes (e.g. add tests for utils)
+* [devops] Github workflows (e.g. add pyright type checking Github action)
 
-example of how Pandas does this for `melt` in their [melt documentation page](https://pandas.pydata.org/docs/reference/api/pandas.melt.html) and how it looks in the [melt docstring](https://github.com/pandas-dev/pandas/blob/v1.4.1/pandas/core/shared_docs.py#L153).
+Those prefixed are then used to generate the changelog and decide which version number change is necessary for a release.
 
-Docstring architecture sample:
+### Labels for pull requests
+Once your PR needs attention, please add an appropriate label:
 
-```
-def return_first_elements(n=5):
-    """
-    Return the first elements of a given Series.
+- https://github.com/ourownstory/neural_prophet/labels/status%3A%20blocked
+- https://github.com/ourownstory/neural_prophet/labels/status%3A%20in%20development
+- https://github.com/ourownstory/neural_prophet/labels/status%3A%20needs%20review
+- https://github.com/ourownstory/neural_prophet/labels/status%3A%20needs%20update
+- https://github.com/ourownstory/neural_prophet/labels/status%3A%20ready
 
-    This function is mainly useful to preview the values of the
-    Series without displaying all of it.
+### Issue labels
 
-    Parameters
-    ----------
-    n : int
-        Number of values to return.
+Issues should always have a type and a priority. Other labels are optional.
 
-    Return
-    ------
-    pandas.Series
-        Subset of the original series with the n first values.
+**Issue type**
 
-    See Also
-    --------
-    tail : Return the last n elements of the Series.
-    Examples
-    --------
-    If you have multi-index columns:
-    >>> df.columns = [list('ABC'), list('DEF')]
-    >>> df
-       A  B  C
-       D  E  F
-    0  a  1  2
-    1  b  3  4
-    2  c  5  6
-    """
-    return self.iloc[:n]
-```
+https://github.com/ourownstory/neural_prophet/labels/bug
+https://github.com/ourownstory/neural_prophet/labels/epic
+https://github.com/ourownstory/neural_prophet/labels/task
+(questions should be moved to [discussions](https://github.com/ourownstory/neural_prophet/discussions))
 
-### Tutorials: Editing existing and adding new
-The Jupyter notebooks located inside `tutorials/` are rendered using the Sphinx `nblink` package. 
+**Priorities**
 
-When you add a new tutorial notebook, please add the tutorial file to the respective section inside `docs/source/contents.rst`.
+https://github.com/ourownstory/neural_prophet/labels/P1
+https://github.com/ourownstory/neural_prophet/labels/P2
+https://github.com/ourownstory/neural_prophet/labels/P3
 
-Next, automatically generate the corresponding `.nblink` files by running this command: 
+**Getting started**
 
-```bash
-python3 docs/check_nblink_files.py
-```
-In case you changed the name of an existing tutorial please follow the same steps outlined above.
+https://github.com/ourownstory/neural_prophet/labels/good%20first%20issue
 
-### Building documentation
-To build the documentation:
+**Closed for reason**
 
-1. Build and install NeuralProphet as described [above](#dev-install).
-
-2. Create a new branch and perform respective documentation changes. 
-
-3. Create PR to merge new branch into main.
-
-4. After merge: Checkout `gh-pages`, navigate to `cd docs\` and generate the documentation HTML files. The generated files will be in `docs/build/html`.
-
-```bash
-make html
-```
-
-5. Commit and push changes to branch `gh-pages`. Changes should be reflected instantly on the [documentation website](http://www.neuralprophet.com).
-
-## Testing and Code Coverage
-
-We are using `PyTest` to run tests within our projects. All tests can be found in `tests/` directory. 
-
-All tests can be triggered via the command: 
-
-```bash
-pytest -v
-```
-
-Running specific tests can be done by running the command: 
-
-```bash
-pytest tests/ -k "name_of_test"
-```
-
-We are using [pytest-cov](https://pypi.org/project/pytest-cov/) and [codecov](https://app.codecov.io/gh/ourownstory/neural_prophet) to create transparent code coverage reports.
-To locally trigger and output a code coverage report via the commandline, run the following command: 
-
-```bash
-pytest --cov=./
-```
-
-
-## Continous Integration
-
-We are using Github Actions to setup a CI pipeline. The creation as well as single commits to a pull request trigger the CI pipeline.
-
-Currently there is one workflow called `.github/worklfows/ci.yml` to trigger testing, create code coverage reports via [pytest-cov](https://pypi.org/project/pytest-cov/) and subsequently uploading reports via [codecov](https://app.codecov.io/gh/ourownstory/neural_prophet) for the major OS systems (Linux, Mac, Windows). 
-
-
-## Style
-We deploy Black, the uncompromising code formatter, so there is no need to worry about style. Beyond that, where reasonable, for example for docstrings, we follow the [Google Python Style Guide](http://google.github.io/styleguide/pyguide.html)
-
-As for Git practices, please follow the steps described at [Swiss Cheese](https://github.com/ourownstory/swiss-cheese/blob/master/git_best_practices.md) for how to git-rebase-squash when working on a forked repo. (Update: all PR are now squashed, so you can skip this step, but it's still good to know.)
+https://github.com/ourownstory/neural_prophet/labels/duplicate
+https://github.com/ourownstory/neural_prophet/labels/wontfix
